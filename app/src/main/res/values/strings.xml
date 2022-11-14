@@ -29,4 +29,22 @@
 
     <string name="driver_online">online</string>
     <string name="driver_offline">offline</string>
+
+    <string name="user">User</string>
+    <string name="driver">Driver</string>
+    <string name="passenger">Passenger</string>
+    <string name="account">Account</string>
+    <string name="inbox">inbox</string>
+    <string name="ride_history">Ride History</string>
+    <string name="home">Home</string>
+    <string name="home_long">Map</string>
+    <string name="account_long">Change your account</string>
+    <string name="inbox_long">Read your messages</string>
+    <string name="ride_history_long">See your past rides</string>
+
+    <string name="description">Description</string>
+    <string name="line1">Line1</string>
+    <string name="line2">Line2</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>
