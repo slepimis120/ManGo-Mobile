@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Man Go</string>
+
+    <string name="splash_text">This is a Splash Screen</string>
+
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="username_hint">Username</string>
+    <string name="password_hint">Password</string>
+    <string name="username_login"> </string>
+    <string name="password_login"> </string>
+
+    <string name="main_menu">Main Menu</string>
+    <string name="user_login">User Login</string>
+
+    <string name="main_account">Account</string>
+    <string name="main_inbox">Inbox</string>
+
+    <string name="register_email">E-mail:</string>
+    <string name="register_email_hint">E-mail</string>
+    <string name="register_phone">Phone:</string>
+    <string name="register_phone_hint">Phone</string>
+    <string name="register_password">Password:</string>
+    <string name="register_password_hint">Password</string>
+
+    <string name="login_loginBtn">loginBtn</string>
+    <string name="login_registerBtn">login_registerBtn</string>
+    <string name="register_registerBtn">register_registerBtn</string>
+
+    <string name="driver_online">online</string>
+    <string name="driver_offline">offline</string>
+</resources>
