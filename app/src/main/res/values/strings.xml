@@ -22,6 +22,15 @@
     <string name="register_phone_hint">Phone</string>
     <string name="register_password">Password:</string>
     <string name="register_password_hint">Password</string>
+    <string name="fname">First Name</string>
+    <string name="lname">Last Name</string>
+    <string name="repeat_password">Repeat Password</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="terms_and_conditions">Agree to terms and conditions</string>
+    <string name="sign_up">Sign up</string>
+    <string name="have_an_account">Already have an account?</string>
 
     <string name="login_loginBtn">loginBtn</string>
     <string name="login_registerBtn">login_registerBtn</string>
@@ -47,4 +56,12 @@
     <string name="line2">Line2</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+
+    <string name="create_account">CREATE ACCOUNT</string>
+
+
+
+
+
+
 </resources>
