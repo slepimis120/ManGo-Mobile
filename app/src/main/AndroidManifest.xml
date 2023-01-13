@@ -12,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UberApp_Tim21"
         tools:targetApi="31">
+
         <activity
-            android:name="activity.model.PassengerInbox"
+            android:name=".activity.driver.DriverMainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -43,14 +44,6 @@
         <activity
             android:name=".activity.driver.DriverRideHistoryActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.driver.DriverMainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyDialog">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
