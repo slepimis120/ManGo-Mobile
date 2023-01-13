@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.uberapp_tim21.R;
+import com.example.uberapp_tim21.activity.driver.DriverMainActivity;
 
 public class PassengerRegisterActivity extends AppCompatActivity {
 
