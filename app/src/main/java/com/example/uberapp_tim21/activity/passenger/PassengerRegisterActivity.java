@@ -1,4 +1,4 @@
-package com.example.uberapp_tim21.activity;
+package com.example.uberapp_tim21.activity.passenger;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.uberapp_tim21.R;
-import com.example.uberapp_tim21.activity.passenger.PassengerMainActivity;
+import com.example.uberapp_tim21.activity.driver.DriverMainActivity;
 
 public class PassengerRegisterActivity extends AppCompatActivity {
 
