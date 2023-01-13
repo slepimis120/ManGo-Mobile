@@ -17,16 +17,14 @@ public class PassengerRegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_register);
 
-        Button loginBtn = findViewById(R.id.register_registerBtn);
-        loginBtn.setOnClickListener(new View.OnClickListener() {
+        Button registerBtn = findViewById(R.id.register_sign_up_btn);
+        registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PassengerRegisterActivity.this, PassengerMainActivity.class);
                 startActivity(intent);
             }
         });
-
-
     }
 
     @Override

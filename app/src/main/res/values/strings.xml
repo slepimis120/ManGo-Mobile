@@ -48,6 +48,15 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="fname">First name</string>
+    <string name="lname">Last name</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="address">Address</string>
+    <string name="terms_and_conditions">Agree to terms and conditions</string>
+    <string name="sign_up">Sign up</string>
+    <string name="have_an_account">Already have an account?</string>
+
     <string name="profile">Profile</string>
     <string name="history">History</string>
     <string name="messages">Messages</string>
