@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.uberapp_tim21.R;
@@ -50,6 +51,8 @@ public class DriverMainActivity extends AppCompatActivity implements BottomNavig
         bottomNavigationView = findViewById(R.id.bottonnav);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.bottom_navbar_home);
+
+
         handler.postDelayed(new Runnable() {
             public void run() {
                 ifRideIsAvailable();
@@ -62,6 +65,13 @@ public class DriverMainActivity extends AppCompatActivity implements BottomNavig
             }
         }, delay);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        findViewById(R.id.driver_ride_details).setVisibility(View.GONE);
+    }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -95,6 +105,7 @@ public class DriverMainActivity extends AppCompatActivity implements BottomNavig
         dialogueBuilder = new AlertDialog.Builder(this);
         final View ridePopupView = getLayoutInflater().inflate(R.layout.popup, null);
 
+
         popup_passenger_number = (TextView) ridePopupView.findViewById(R.id.popup_passenger_number);
         popup_distance = (TextView) ridePopupView.findViewById(R.id.popup_distance);
         popup_locations = (TextView) ridePopupView.findViewById(R.id.popup_locations);
@@ -121,6 +132,18 @@ public class DriverMainActivity extends AppCompatActivity implements BottomNavig
                 call.enqueue(new Callback<RideDTO>(){
                     @Override
                     public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
+
+                        TextView start = findViewById(R.id.driver_start_location);
+                        start.setText(rideDTO.getLocations().get(0).getDeparture().getAddress());
+                        TextView end = findViewById(R.id.driver_end_location);
+                        end.setText(rideDTO.getLocations().get(0).getDestination().getAddress());
+                        TextView price = findViewById(R.id.driver_price);
+                        price.setText("Price: " + rideDTO.getTotalCost() + " din") ;
+                        TextView duration = findViewById(R.id.driver_duration);
+                        duration.setText("Duration: " + rideDTO.getEstimatedTimeInMinutes() + " min") ;
+                        TextView distance = findViewById(R.id.driver_distance);
+                        duration.setText("Distance: " + rideDTO.getEstimatedTimeInMinutes() + " km") ;
+                        findViewById(R.id.driver_ride_details).setVisibility(View.VISIBLE);
 
                     }
 

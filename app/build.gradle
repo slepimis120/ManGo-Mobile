@@ -7,8 +7,6 @@ android {
     namespace 'com.example.uberapp_tim21'
     compileSdk 32
 
-    useLibrary 'org.apache.http.legacy'
-
     defaultConfig {
         applicationId "com.example.uberapp_tim21"
         minSdk 30
@@ -52,6 +50,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.google.android.gms:play-services-location:11.8.0'
     implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
+
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'

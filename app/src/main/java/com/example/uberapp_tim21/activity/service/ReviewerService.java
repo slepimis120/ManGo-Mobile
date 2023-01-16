@@ -34,5 +34,6 @@ public interface ReviewerService {
     Call<RideDTO> acceptRide(@Path(value="id") Integer id);
 
     @PUT(ServiceUtils.SERVICE_API_PATH + "ride/{id}/cancel")
+
     Call<RideDTO> cancelRide(@Path(value="id") Integer id, @Body SendRejectionDTO sendRejectionDTO);
 }

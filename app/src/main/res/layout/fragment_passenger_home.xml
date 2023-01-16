@@ -37,7 +37,7 @@
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
                 android:textSize="30dp"
-                android:textColor="@color/dark_gray"
+                android:textColor="#3E3E3E"
                 android:padding="10dp"/>
 
         </LinearLayout>
@@ -82,7 +82,7 @@
                     android:paddingStart="15dp"
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
-                    android:textColor="@color/dark_gray"/>
+                    android:textColor="#3E3E3E"/>
 
                 <EditText
                     android:id="@+id/end_location_passenger"
@@ -97,7 +97,7 @@
                     android:paddingBottom="8dp"
                     android:paddingTop="8dp"
                     android:layout_marginTop="10dp"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="#3E3E3E"
                     />
             </LinearLayout>
         </LinearLayout>
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:text="@string/set_route"
             android:backgroundTint="@color/white"
-            android:textColor="@color/dark_gray"
+            android:textColor="#3E3E3E"
             android:layout_gravity="center"
             android:id="@+id/set_route_button"
             >
@@ -146,7 +146,7 @@
                 android:fontFamily="@font/open_sans"
                 android:gravity="center"
                 android:textSize="30dp"
-                android:textColor="@color/dark_gray"
+                android:textColor="#3E3E3E"
                 android:padding="10dp"/>
 
         </LinearLayout>
@@ -172,7 +172,7 @@
                     android:gravity="center"
                     android:text="@string/standard"
                     android:buttonTint="@color/mango_yellow"
-                    android:textColor="@color/dark_gray"/>
+                    android:textColor="#3E3E3E"/>
 
                 <RadioButton
                     android:id="@+id/luxury"
@@ -180,7 +180,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/luxury"
                     android:buttonTint="@color/mango_yellow"
-                    android:textColor="@color/dark_gray"/>
+                    android:textColor="#3E3E3E"/>
 
                 <RadioButton
                     android:id="@+id/van"
@@ -188,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/van"
                     android:buttonTint="@color/mango_yellow"
-                    android:textColor="@color/dark_gray"
+                    android:textColor="#3E3E3E"
                     />
             </RadioGroup>
 
@@ -199,7 +199,7 @@
                 android:text="@string/transporting_pets"
                 android:layoutDirection="rtl"
                 android:buttonTint="@color/mango_yellow"
-                android:textColor="@color/dark_gray"/>
+                android:textColor="#3E3E3E"/>
 
             <CheckBox
                 android:id="@+id/transporting_babies"
@@ -208,7 +208,7 @@
                 android:text="@string/transporting_babies"
                 android:layoutDirection="rtl"
                 android:buttonTint="@color/mango_yellow"
-                android:textColor="@color/dark_gray"
+                android:textColor="#3E3E3E"
                 />
 
         </LinearLayout>
@@ -218,7 +218,7 @@
             android:layout_height="wrap_content"
             android:text="@string/find_vehicle"
             android:backgroundTint="@color/white"
-            android:textColor="@color/dark_gray"
+            android:textColor="#3E3E3E"
             android:layout_gravity="center"
             android:id="@+id/find_vehicle_btn"
             >

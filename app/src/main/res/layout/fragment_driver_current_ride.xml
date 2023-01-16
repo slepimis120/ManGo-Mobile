@@ -1,14 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.driver.DriverCurrentRideFragment">
+    tools:context=".activity.driver.DriverCurrentRideFragment"
+    android:orientation="vertical"
+    android:background="@color/white" >
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/driver_ride_details">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/your_current_ride"
+                android:textColor="#3E3E3E"
+                android:textSize="30dp"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:id="@+id/driver_start_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Starting point"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:background="@color/light_gray"
+                android:alpha="0.8"
+                android:fontFamily="@font/noto_sans"
+                android:textColor="@color/black"
+                android:padding="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                />
+
+            <TextView
+                android:id="@+id/driver_end_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Ending point"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:background="@color/light_gray"
+                android:alpha="0.8"
+                android:fontFamily="@font/noto_sans"
+                android:textColor="@color/black"
+                android:padding="5dp"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp"
+                android:layout_marginTop="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/driver_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Price:"
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:drawableStart="@drawable/dollar_icon"
+                    android:alpha="0.8"/>
+
+                <TextView
+                    android:id="@+id/driver_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Duration: "
+                    android:textColor="@color/black"
+                    android:textSize="15dp"
+                    android:drawableStart="@drawable/time_icon"
+                    android:alpha="0.8"/>
+
+                <TextView
+                    android:id="@+id/driver_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Distance:"
+                    android:drawableStart="@drawable/run_icon"
+                    android:textSize="15dp"
+                    android:alpha="0.8"
+                    android:textColor="@color/black"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/end_ride"
+            android:backgroundTint="@color/white"
+            android:textColor="#3E3E3E"
+            android:layout_gravity="center"
+            android:id="@+id/end_ride_button"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            >
+
+        </Button>
+
+    </TableLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".activity.passenger.PassengerHomeFragment" />
 
-</FrameLayout>
+
+</LinearLayout>
