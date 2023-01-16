@@ -62,6 +62,16 @@
     <string name="messages">Messages</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="where_are_you_going">Where are you going?</string>
+    <string name="set_route">Set route</string>
+    <string name="ride_details">Ride details</string>
+    <string name="standard">STANDARD</string>
+    <string name="luxury">LUXURY</string>
+    <string name="van">VAN</string>
+    <string name="transporting_pets">Transporting pets?</string>
+    <string name="transporting_babies">Transporting babies?</string>
+    <string name="find_vehicle">Find vehicle</string>
+    <string name="your_current_ride">Your current ride</string>
+    <string name="end_ride">End ride</string>
 
 </resources>
