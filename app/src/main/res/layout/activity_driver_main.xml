@@ -8,13 +8,22 @@
     tools:context=".activity.driver.DriverMainActivity">
 
     <RelativeLayout
+        android:id="@+id/driver_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/relativelayout"
         android:layout_marginBottom="65dp"
         android:padding="5dp">
 
     </RelativeLayout>
 
-
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottonnav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/mango_yellow"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/navbar_colors"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navbar"></com.google.android.material.bottomnavigation.BottomNavigationView>
 </RelativeLayout>
