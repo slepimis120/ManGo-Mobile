@@ -84,5 +84,9 @@
     <string name="find_vehicle">Find vehicle</string>
     <string name="your_current_ride">Your current ride</string>
     <string name="end_ride">End ride</string>
+    <string name="string_my_profile">My profile</string>
+    <string name="first_last_name">First and Last name</string>
+    <string name="phone_number">+381600538922</string>
+    <string name="generate_report">Generate report</string>
 
 </resources>
