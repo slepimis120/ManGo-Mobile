@@ -12,6 +12,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PassengerMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
+
+
+
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +24,7 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.bottom_navbar_home);
         loadFragment(new PassengerHomeFragment());
+
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

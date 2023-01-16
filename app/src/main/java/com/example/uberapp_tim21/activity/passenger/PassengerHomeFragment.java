@@ -5,7 +5,9 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -14,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,9 +25,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.uberapp_tim21.R;
+import com.example.uberapp_tim21.activity.tools.DirectionPointListener;
+import com.example.uberapp_tim21.activity.tools.GetPathFromLocation;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -34,9 +38,13 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
+
+import java.util.List;
 
 
-public class PassengerHomeFragment extends Fragment implements LocationListener, OnMapReadyCallback {
+public class PassengerHomeFragment extends Fragment implements LocationListener, OnMapReadyCallback, View.OnFocusChangeListener {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     private LocationManager locationManager;
@@ -45,25 +53,81 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     private AlertDialog dialog;
     private Marker home;
     private GoogleMap map;
+    EditText startLocation ;
+    EditText endLocation;
+    Marker startMarker;
+    Marker endMarker;
+    LatLng startCoordinates;
+    LatLng endCoordinates;
+    private String TAG = "so47492459";
+    Polyline route;
+
+
+
+
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 
+
     }
+
+    @Override
+    public void onFocusChange(View view, boolean hasFocus) {
+        if (!hasFocus) {
+            switch (view.getId()) {
+                case R.id.start_location_passenger:
+                    EditText sLocation = ((EditText)getView().findViewById(R.id.start_location_passenger));
+                    String sAddress = sLocation.getText().toString();
+                    if(sAddress.length() > 5){
+                        startCoordinates = getLocationFromAddress(getContext(), sAddress);
+                        if(startMarker != null){
+                            startMarker.remove();
+                        }
+                        startMarker = map.addMarker(new MarkerOptions().position(startCoordinates).title("Nemanja sikelic"));
+                        map.moveCamera(CameraUpdateFactory.newLatLng(startCoordinates));
+                        createRoute();
+                    }
+
+                    break;
+                case R.id.end_location_passenger:
+                    EditText eLocation = ((EditText)getView().findViewById(R.id.end_location_passenger));
+                    String eAddress = eLocation.getText().toString();
+                    if (eAddress.length() > 5){
+                        endCoordinates = getLocationFromAddress(getContext(), eAddress);
+                        if(endMarker != null){
+                            endMarker.remove();
+                        }
+                        endMarker = map.addMarker(new MarkerOptions().position(endCoordinates).title("Nemanja sikelic"));
+                        map.moveCamera(CameraUpdateFactory.newLatLng(endCoordinates));
+                        createRoute();
+                    }
+
+                    break;
+            }
+        }
+    }
+
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+
         return inflater.inflate(R.layout.fragment_passenger_home, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ((EditText)getView().findViewById(R.id.start_location_passenger)).setOnFocusChangeListener(this);
+        ((EditText)getView().findViewById(R.id.end_location_passenger)).setOnFocusChangeListener(this);
         SupportMapFragment mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
@@ -201,6 +265,7 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
 //        map.setMyLocationEnabled(true);
         Location location = null;
 
+
         if (provider == null) {
             Log.i("ASD", "Onmapre");
 
@@ -299,4 +364,49 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
 
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
     }
+
+    public LatLng getLocationFromAddress(Context context, String strAddress)
+    {
+        Geocoder coder= new Geocoder(context);
+        List<Address> address;
+        LatLng p1 = null;
+
+        try
+        {
+            address = coder.getFromLocationName(strAddress, 5);
+            if(address==null)
+            {
+                return null;
+            }
+            Address location = address.get(0);
+            location.getLatitude();
+            location.getLongitude();
+
+            p1 = new LatLng(location.getLatitude(), location.getLongitude());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return p1;
+
+    }
+
+    public void createRoute(){
+        if(startCoordinates != null && endCoordinates != null){
+            if(route != null){
+                route.remove();
+            }
+            new GetPathFromLocation(startCoordinates, endCoordinates, new DirectionPointListener() {
+                @Override
+                public void onPath(PolylineOptions polyLine) {
+                    route = map.addPolyline(polyLine);
+
+                }
+            }).execute();
+        }
+    }
+
+
+
 }
