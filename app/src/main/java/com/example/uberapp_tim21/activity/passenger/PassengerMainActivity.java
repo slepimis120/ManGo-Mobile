@@ -56,11 +56,7 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         call.enqueue(new Callback<RideDTO>(){
             @Override
             public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
-                if(response.isSuccessful()){
-                    loadFragment(new PassengerCurrentRideFragment());
-                }else{
-                    loadFragment(new PassengerHomeFragment());
-                }
+                loadFragment(new PassengerHomeFragment());
             }
 
             @Override
@@ -80,11 +76,6 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
                 break;
             case R.id.bottom_navbar_home:
                 currentFragment = homeFragment;
-                if(this.doesRideExist){
-                    fragment = new PassengerCurrentRideFragment();
-                }else{
-                    fragment = new PassengerHomeFragment();
-                }
                 break;
             case R.id.bottom_navbar_inbox:
                 currentFragment = inboxFragment;
