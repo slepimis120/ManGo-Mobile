@@ -1,31 +1,17 @@
-package com.example.uberapp_tim21.activity.passenger;
+package com.example.uberapp_tim21.activity.driver;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import android.widget.Button;
-import android.widget.EditText;
-
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.RadioGroup;
-import android.widget.TableLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,11 +19,20 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.uberapp_tim21.R;
 import com.example.uberapp_tim21.activity.dto.LocationDTO;
-import com.example.uberapp_tim21.activity.dto.PassengerDTO;
 import com.example.uberapp_tim21.activity.dto.RideLocationDTO;
 import com.example.uberapp_tim21.activity.dto.SendRideDTO;
 import com.example.uberapp_tim21.activity.dto.UserDTO;
@@ -58,17 +53,14 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class PassengerHomeFragment extends Fragment implements LocationListener, OnMapReadyCallback {
+public class DriverCurrentRideFragment extends Fragment implements LocationListener, OnMapReadyCallback {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
-
     private LocationManager locationManager;
     private String provider;
     private SupportMapFragment mMapFragment;
     private AlertDialog dialog;
     private Marker home;
     private GoogleMap map;
-
     EditText startLocation ;
     EditText endLocation;
     Marker startMarker;
@@ -79,11 +71,11 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     Polyline route;
     SendRideDTO ourRide;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
 
     }
 
@@ -92,7 +84,8 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_passenger_home, container, false);
+
+        return inflater.inflate(R.layout.fragment_driver_current_ride, container, false);
     }
 
     @Override
@@ -103,38 +96,11 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
-        getView().findViewById(R.id.ride_details).setVisibility(View.GONE);
-        Button setRouteBtn = getView().findViewById(R.id.set_route_button);
-        setRouteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getView().findViewById(R.id.address_input).setVisibility(View.GONE);
-                getView().findViewById(R.id.ride_details).setVisibility(View.VISIBLE);
-
-            }
-        });
-        ImageButton backBtn = getView().findViewById(R.id.back_details);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getView().findViewById(R.id.address_input).setVisibility(View.VISIBLE);
-                getView().findViewById(R.id.ride_details).setVisibility(View.GONE);
-            }
-        });
-        Button findVehicleBtn = getView().findViewById(R.id.find_vehicle_btn);
-        setRouteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createRide();
-            }
-        });
-
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
         locationManager.removeUpdates(this);
     }
 
@@ -142,9 +108,7 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     @Override
     public void onResume() {
         super.onResume();
-
         createMapFragmentAndInflate();
-
         boolean gps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         boolean wifi = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
         Log.i("wwww", String.valueOf(gps));
@@ -260,6 +224,7 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
         map = googleMap;
 //        map.setMyLocationEnabled(true);
         Location location = null;
+
 
         if (provider == null) {
             Log.i("ASD", "Onmapre");
@@ -440,6 +405,4 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
         ourRide = finalRide;
 
     }
-
-
 }

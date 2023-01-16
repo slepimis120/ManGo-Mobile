@@ -11,6 +11,7 @@
 
     <application
         android:allowBackup="true"
+        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher_mango"
@@ -50,13 +51,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.passenger.PassengerRideHistoryActivity"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".activity.driver.DriverInboxActivity"
             android:exported="false">
             <meta-data
@@ -73,22 +67,6 @@
         <activity
             android:name=".activity.driver.DriverRideHistoryActivity"
             android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.passenger.PassengerInboxActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyDialog">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".activity.passenger.PassengerAccountActivity"
-            android:exported="false"
-            android:theme="@style/Theme.MyDialog">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -132,6 +110,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
     </application>
 
 

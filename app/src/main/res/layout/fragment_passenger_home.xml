@@ -5,17 +5,15 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
+
     tools:context=".activity.passenger.PassengerHomeFragment"
     android:orientation="vertical"
     android:background="@color/white">
 
-    <TableLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:id="@+id/passenger_home_fragment_views"
-        >
-    </TableLayout>
+<TableLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/address_input">
 
 
     <Button
@@ -32,6 +30,215 @@
         android:textColor="@color/black"
         android:textSize="24dp"/>
 
+        <ImageButton
+            android:id="@+id/back_address"
+            android:layout_width="52sp"
+            android:layout_height="32sp"
+            android:layout_weight="1"
+            android:alpha="0.6"
+            android:background="@drawable/previous_icon"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/where_are_you_going"
+            android:fontFamily="@font/open_sans"
+            android:gravity="center"
+            android:textSize="30dp"
+            android:textColor="@color/dark_gray"
+            android:padding="10dp"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:src="@drawable/start_to_end_icon"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="1"
+
+            android:gravity="center"
+            >
+
+            <EditText
+                android:id="@+id/start_location_passenger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="14"
+                android:inputType="textPostalAddress"
+                android:hint="Start location"
+                android:layout_gravity="center"
+                android:background="@drawable/border_yellow"
+                android:paddingStart="15dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:textColor="@color/dark_gray"/>
+
+            <EditText
+                android:id="@+id/end_location_passenger"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="14"
+                android:inputType="textPostalAddress"
+                android:hint="End location"
+                android:layout_gravity="center"
+                android:background="@drawable/border_orange"
+                android:paddingStart="15dp"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/dark_gray"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/set_route"
+        android:backgroundTint="@color/white"
+        android:textColor="@color/dark_gray"
+        android:layout_gravity="center"
+        android:id="@+id/set_route_button"
+        >
+
+    </Button>
+
+</TableLayout>
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ride_details">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/back_details"
+                android:layout_width="52sp"
+                android:layout_height="32sp"
+                android:layout_weight="1"
+                android:alpha="0.6"
+                android:background="@drawable/previous_icon"
+                android:layout_gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ride_details"
+                android:fontFamily="@font/open_sans"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:textColor="@color/dark_gray"
+                android:padding="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:id="@+id/vehicle_type">
+
+                <RadioButton
+                    android:id="@+id/standard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:gravity="center"
+                    android:text="@string/standard"
+                    android:buttonTint="@color/mango_yellow"
+                    android:textColor="@color/dark_gray"/>
+
+                <RadioButton
+                    android:id="@+id/luxury"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/luxury"
+                    android:buttonTint="@color/mango_yellow"
+                    android:textColor="@color/dark_gray"/>
+
+                <RadioButton
+                    android:id="@+id/van"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/van"
+                    android:buttonTint="@color/mango_yellow"
+                    android:textColor="@color/dark_gray"
+                    />
+            </RadioGroup>
+
+            <CheckBox
+                android:id="@+id/transporting_pets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transporting_pets"
+                android:layoutDirection="rtl"
+                android:buttonTint="@color/mango_yellow"
+                android:textColor="@color/dark_gray"/>
+
+            <CheckBox
+                android:id="@+id/transporting_babies"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/transporting_babies"
+                android:layoutDirection="rtl"
+                android:buttonTint="@color/mango_yellow"
+                android:textColor="@color/dark_gray"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/find_vehicle"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/dark_gray"
+            android:layout_gravity="center"
+            android:id="@+id/find_vehicle_btn"
+            >
+        </Button>
+    </TableLayout>
+
+
+
 
     <fragment
         android:id="@+id/map"
@@ -42,6 +249,3 @@
 
 
 </LinearLayout>
-=======
-    tools:context=".activity.passenger.PassengerHomeFragment" />
->>>>>>> parent of 9ceb3b8 (Created mapping of inputted addresses and drawing a route between them)
