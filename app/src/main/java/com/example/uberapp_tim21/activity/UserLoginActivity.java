@@ -9,6 +9,7 @@ import android.widget.Button;
 
 import com.example.uberapp_tim21.R;
 import com.example.uberapp_tim21.activity.driver.DriverMainActivity;
+import com.example.uberapp_tim21.activity.passenger.PassengerRegisterActivity;
 
 public class UserLoginActivity extends AppCompatActivity {
 
@@ -34,6 +35,8 @@ public class UserLoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
     @Override

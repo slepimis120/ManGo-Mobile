@@ -1,196 +1,198 @@
 package com.example.uberapp_tim21.activity.driver;
 
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.content.Intent;
-import android.content.res.Configuration;
-import android.os.Build;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
-import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.ToggleButton;
-import androidx.appcompat.widget.Toolbar;
-
 
 import com.example.uberapp_tim21.R;
-import com.example.uberapp_tim21.activity.adapters.DrawerListAdapter;
-import com.example.uberapp_tim21.activity.model.NavItem;
-import com.example.uberapp_tim21.activity.tools.FragmentTransition;
+import com.example.uberapp_tim21.activity.dto.RideDTO;
+import com.example.uberapp_tim21.activity.dto.SendRejectionDTO;
+import com.example.uberapp_tim21.activity.service.ServiceUtils;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class DriverMainActivity extends AppCompatActivity {
-    private ArrayList<NavItem> mNavItems = new ArrayList<NavItem>();
-    private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
-    private RelativeLayout mDrawerPane;
-    private CharSequence mTitle;
-    private DrawerLayout mDrawerLayout;
+public class DriverMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
+    Integer id = 1;
+    BottomNavigationView bottomNavigationView;
+    private AlertDialog.Builder dialogueBuilder;
+    private AlertDialog dialog;
+    private Button decline, accept, cancel;
+    private TextView popup_passenger_number, popup_distance, popup_locations, popup_price;
+    private TextInputLayout insertText;
+    private RideDTO rideDTO = null;
+    private boolean hasPendingRide = false;
+    private boolean hasActiveRide = false;
+
+    final Handler handler = new Handler();
+    final int delay = 10000;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main);
-
-        prepareMenu(mNavItems);
-
-        mTitle = getTitle();
-        mDrawerLayout = findViewById(R.id.drawerLayout);
-        mDrawerList = findViewById(R.id.navList);
-
-        mDrawerPane = findViewById(R.id.drawerPane);
-        DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        mDrawerList.setAdapter(adapter);
-
-        TextView text = findViewById(R.id.driverState);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        final ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setIcon(R.drawable.splashdark);
-            actionBar.setHomeAsUpIndicator(R.drawable.burger_icon);
-            actionBar.setHomeButtonEnabled(true);
-        }
-
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,
-                mDrawerLayout,
-                toolbar,
-                R.string.drawer_open,
-                R.string.drawer_close
-        ) {
-            public void onDrawerClosed(View view) {
-                getSupportActionBar().setTitle(mTitle);
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle("iReviewer");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
-
-        // Izborom na neki element iz liste, pokrecemo akciju
-        if (savedInstanceState == null) {
-            selectItemFromDrawer(0);
-        }
-
-        ToggleButton toggle = findViewById(R.id.stateBtn);
-        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    text.setVisibility(View.VISIBLE);
-                    text.setText("online");
-                } else {
-                    text.setVisibility(View.VISIBLE);
-                    text.setText("offline");
+        bottomNavigationView = findViewById(R.id.bottonnav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.bottom_navbar_home);
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                ifRideIsAvailable();
+                if(rideDTO != null && !hasPendingRide){
+                    getNewRide();
+                    hasPendingRide = true;
+                    handler.removeCallbacksAndMessages(null);
                 }
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+        switch (item.getItemId()) {
+            case R.id.bottom_navbar_profile:
+                fragment = new DriverProfileFragment();
+                break;
+            case R.id.bottom_navbar_home:
+                fragment = new DriverCurrentRideFragment();
+                break;
+            case R.id.bottom_navbar_inbox:
+                fragment = new DriverInboxFragment();
+                break;
+            case R.id.bottom_navbar_history:
+                fragment = new DriverHistoryFragment();
+                break;
+        }
+        if (fragment != null) {
+            loadFragment(fragment);
+        }
+        return true;
+    }
+
+    void loadFragment(Fragment fragment) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.driver_content, fragment).commit();
+    }
+
+    public void getNewRide(){
+
+        dialogueBuilder = new AlertDialog.Builder(this);
+        final View ridePopupView = getLayoutInflater().inflate(R.layout.popup, null);
+
+        popup_passenger_number = (TextView) ridePopupView.findViewById(R.id.popup_passenger_number);
+        popup_distance = (TextView) ridePopupView.findViewById(R.id.popup_distance);
+        popup_locations = (TextView) ridePopupView.findViewById(R.id.popup_locations);
+        popup_price = (TextView) ridePopupView.findViewById(R.id.popup_price);
+
+        accept = (Button) ridePopupView.findViewById(R.id.popup_accept);
+        decline = (Button) ridePopupView.findViewById(R.id.popup_decline);
+
+        popup_passenger_number.setText(popup_passenger_number.getText() + " " + rideDTO.getPassengers().size());
+        popup_distance.setText(popup_distance.getText() + " " + rideDTO.getEstimatedTimeInMinutes());
+        popup_locations.setText(popup_locations.getText() + " " + rideDTO.getLocations().get(0).getDeparture().getAddress() + " - " + rideDTO.getLocations().get(0).getDestination().getAddress());
+        popup_price.setText(popup_price.getText() + " " + rideDTO.getTotalCost() + "RSD");
+
+        dialogueBuilder.setView(ridePopupView);
+        dialog = dialogueBuilder.create();
+        dialog.show();
+
+        accept.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                hasActiveRide = true;
+                Call<RideDTO> call = ServiceUtils.reviewerService.acceptRide(rideDTO.getId());
+                call.enqueue(new Callback<RideDTO>(){
+                    @Override
+                    public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<RideDTO> call, Throwable t) {
+                        Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                    }
+                });
+                dialog.hide();
+            }
+        });
+
+        decline.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                hasPendingRide = false;
+                dialog.hide();
+                askForReason();
             }
         });
     }
 
-    @Override
-    protected void onResume() {
-        // TODO Auto-generated method stub
-        super.onResume();
-        Intent i = getIntent();
-        if (i.getExtras() != null) {
-            String intentFragment = i.getExtras().getString("loadFrg");
-        }
-    }
 
+    public void askForReason(){
+        dialogueBuilder = new AlertDialog.Builder(this);
+        final View ridePopupView = getLayoutInflater().inflate(R.layout.popup_cancel, null);
 
-    /* The click listner for ListView in the navigation drawer */
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            selectItemFromDrawer(position);
-            Log.i("Pisi", String.valueOf(position));
+        insertText = (TextInputLayout) ridePopupView.findViewById(R.id.popup_reason_cancel);
+        cancel = (Button) ridePopupView.findViewById(R.id.cancelButton);
 
-        }
-    }
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-    }
+        dialogueBuilder.setView(ridePopupView);
+        dialog = dialogueBuilder.create();
+        dialog.show();
 
+        cancel.setOnClickListener(new View.OnClickListener(){
 
+            @Override
+            public void onClick(View v) {
+                SendRejectionDTO sendRejectionDTO = new SendRejectionDTO(insertText.getEditText().getText().toString());
+                Call<RideDTO> call = ServiceUtils.reviewerService.cancelRide(rideDTO.getId(), sendRejectionDTO);
+                call.enqueue(new Callback<RideDTO>(){
+                    @Override
+                    public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
+                        dialog.hide();
+                    }
 
-    private void selectItemFromDrawer(int position) {
-        if(position == 0){
-            //
-        }else if(position == 1){
-            //
-
-        }else if(position == 2){
-            //..
-        }else if(position == 3){
-            //..
-        }else if(position == 4){
-            //..
-        }else if(position == 5){
-            //...
-        }else{
-            Log.e("DRAWER", "Nesto van opsega!");
-        }
-
-        mDrawerList.setItemChecked(position, true);
-        if(position != 5) // za sve osim za sync
-        {
-            setTitle(mNavItems.get(position).getmTitle());
-        }
-        mDrawerLayout.closeDrawer(mDrawerPane);
-    }
-
-    private void prepareMenu(ArrayList<NavItem> mNavItems) {
-        mNavItems.add(new NavItem(getString(R.string.home), getString(R.string.home_long), R.drawable.home_icon));
-        mNavItems.add(new NavItem(getString(R.string.account), getString(R.string.account_long), R.drawable.pen_icon));
-        mNavItems.add(new NavItem(getString(R.string.inbox), getString(R.string.inbox_long), R.drawable.message_icon));
-        mNavItems.add(new NavItem(getString(R.string.ride_history), getString(R.string.ride_history_long), R.drawable.history_icon));
-    }
-
-    @Override
-    public void setTitle(CharSequence title) {
-        mTitle = title;
-        getSupportActionBar().setTitle(mTitle);
-    }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
+                    @Override
+                    public void onFailure(Call<RideDTO> call, Throwable t) {
+                        Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+                    }
+                });
+            }
+        });
 
     }
 
+    public boolean ifRideIsAvailable(){
+        Call<RideDTO> call = ServiceUtils.reviewerService.checkIfDriverHasRide(id);
+        call.enqueue(new Callback<RideDTO>(){
+            @Override
+            public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
+                if(response.body() != null){
+                    rideDTO = response.body();
+                }
+            }
 
+            @Override
+            public void onFailure(Call<RideDTO> call, Throwable t) {
+                Log.d("REZ", t.getMessage() != null?t.getMessage():"error");
+            }
+        });
+        return true;
+    }
 }
