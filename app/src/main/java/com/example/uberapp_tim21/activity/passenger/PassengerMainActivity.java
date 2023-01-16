@@ -10,15 +10,18 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.example.uberapp_tim21.R;
 import com.example.uberapp_tim21.activity.dto.RideDTO;
+import com.example.uberapp_tim21.activity.dto.SendRideDTO;
 import com.example.uberapp_tim21.activity.service.ServiceUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class PassengerMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -47,6 +50,16 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         currentFragment = homeFragment;
         loadFragment(currentFragment);
 
+        RelativeLayout content  = findViewById(R.id.passenger_content);
+        content.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(homeFragment.ourRide != null){
+                    checkIfRideIsAvailable(homeFragment.ourRide);
+                }
+            }
+        });
+
 
         Call<RideDTO> call = ServiceUtils.reviewerService.getPassengerActiveRide(id);
         call.enqueue(new Callback<RideDTO>(){
@@ -69,7 +82,7 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
-        checkIfRideIsAvailable();
+        //checkIfRideIsAvailable();
         switch (item.getItemId()) {
             case R.id.bottom_navbar_profile:
                 currentFragment = profileFragment;
@@ -98,20 +111,19 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         getSupportFragmentManager().beginTransaction().replace(R.id.passenger_content, fragment).commit();
     }
 
-    private void checkIfRideIsAvailable(){
+    private void checkIfRideIsAvailable(SendRideDTO ride){
         //TODO: Implementirati da zapravo prima ID ulogovanog korisnika, ne random ID
-        System.out.println("AA");
-        Call<RideDTO> call = ServiceUtils.reviewerService.getPassengerActiveRide(id);
-        call.enqueue(new Callback<RideDTO>(){
+        Call<SendRideDTO> call = ServiceUtils.reviewerService.getAvailableDrivers(ride);
+        call.enqueue(new Callback<SendRideDTO>(){
             @Override
-            public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
+            public void onResponse(Call<SendRideDTO> call, Response<SendRideDTO> response) {
                 System.out.println(doesRideExist + "2");
                 setDoesRideExist(response.isSuccessful());
                 System.out.println(doesRideExist + "3");
             }
 
             @Override
-            public void onFailure(Call<RideDTO> call, Throwable t) {
+            public void onFailure(Call<SendRideDTO> call, Throwable t) {
                 setDoesRideExist(false);
             }
         });

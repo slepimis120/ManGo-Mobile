@@ -161,10 +161,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/vehicle_type">
 
                 <RadioButton
-                    android:id="@+id/radioButton3"
+                    android:id="@+id/standard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
@@ -174,7 +175,7 @@
                     android:textColor="@color/dark_gray"/>
 
                 <RadioButton
-                    android:id="@+id/radioButton"
+                    android:id="@+id/luxury"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/luxury"
@@ -182,7 +183,7 @@
                     android:textColor="@color/dark_gray"/>
 
                 <RadioButton
-                    android:id="@+id/radioButton2"
+                    android:id="@+id/van"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/van"
@@ -192,7 +193,7 @@
             </RadioGroup>
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/transporting_pets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/transporting_pets"
@@ -201,7 +202,7 @@
                 android:textColor="@color/dark_gray"/>
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/transporting_babies"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/transporting_babies"

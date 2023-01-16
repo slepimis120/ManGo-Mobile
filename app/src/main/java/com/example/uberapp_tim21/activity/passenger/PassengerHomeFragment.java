@@ -18,8 +18,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
@@ -31,6 +33,11 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim21.R;
+import com.example.uberapp_tim21.activity.dto.LocationDTO;
+import com.example.uberapp_tim21.activity.dto.PassengerDTO;
+import com.example.uberapp_tim21.activity.dto.RideLocationDTO;
+import com.example.uberapp_tim21.activity.dto.SendRideDTO;
+import com.example.uberapp_tim21.activity.dto.UserDTO;
 import com.example.uberapp_tim21.activity.tools.DirectionPointListener;
 import com.example.uberapp_tim21.activity.tools.GetPathFromLocation;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -45,6 +52,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -65,6 +73,7 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     LatLng endCoordinates;
     private String TAG = "so47492459";
     Polyline route;
+    SendRideDTO ourRide;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -432,6 +441,41 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     }
 
     public void createRide(){
+        EditText sLocation = ((EditText)getView().findViewById(R.id.start_location_passenger));
+        String sAddress = sLocation.getText().toString();
+        LocationDTO startLocationDTO = new LocationDTO(sAddress, (float) startCoordinates.latitude, (float) startCoordinates.longitude);
+        EditText eLocation = ((EditText)getView().findViewById(R.id.end_location_passenger));
+        String eAddress = eLocation.getText().toString();
+        LocationDTO endLocationDTO = new LocationDTO(eAddress, (float) endCoordinates.latitude, (float) endCoordinates.longitude);
+        RideLocationDTO ridelocation = new RideLocationDTO(startLocationDTO, endLocationDTO);
+        ArrayList<RideLocationDTO> locations = new ArrayList<>();
+        locations.add(ridelocation);
+        UserDTO passenger1 = new UserDTO(1, "aleksandrab024@hotmail.com");
+        UserDTO passenger2 = new UserDTO(2, "slepimis120@gmail.com");
+        ArrayList<UserDTO> passengers = new ArrayList<>();
+        passengers.add(passenger1);
+        passengers.add(passenger2);
+        CheckBox pets = ((CheckBox)getView().findViewById(R.id.transporting_pets));
+        CheckBox babies = ((CheckBox)getView().findViewById(R.id.transporting_babies));
+        boolean transportingPets = pets.isChecked();
+        boolean transportingBabies = babies.isChecked();
+        RadioGroup vehicleType = ((RadioGroup)getView().findViewById(R.id.vehicle_type));
+        String selectedVehicleType = "";
+        switch (vehicleType.getCheckedRadioButtonId()){
+            case R.id.standard:
+                selectedVehicleType = "Standard";
+                break;
+            case R.id.luxury:
+                selectedVehicleType = "Luxury";
+                break;
+            case R.id.van:
+                selectedVehicleType = "Van";
+                break;
+
+        }
+
+        SendRideDTO finalRide = new SendRideDTO(locations, passengers, selectedVehicleType,transportingBabies, transportingPets);
+        ourRide = finalRide;
 
     }
 
