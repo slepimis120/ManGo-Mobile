@@ -4,15 +4,23 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.uberapp_tim21.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PassengerMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
-
+    PassengerHomeFragment homeFragment;
+    PassengerProfileFragment profileFragment;
+    PassengerInboxFragment inboxFragment;
+    PassengerHistoryFragment historyFragment;
+    Fragment currentFragment;
 
 
     BottomNavigationView bottomNavigationView;
@@ -23,28 +31,34 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         bottomNavigationView = findViewById(R.id.bottonnav);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.bottom_navbar_home);
-        loadFragment(new PassengerHomeFragment());
+        homeFragment = new PassengerHomeFragment();
+        profileFragment = new PassengerProfileFragment();
+        inboxFragment = new PassengerInboxFragment();
+        historyFragment = new PassengerHistoryFragment();
+        currentFragment = homeFragment;
+        loadFragment(currentFragment);
+
+
 
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.bottom_navbar_profile:
-                fragment = new PassengerProfileFragment();
+                currentFragment = profileFragment;
                 break;
             case R.id.bottom_navbar_home:
-                fragment = new PassengerHomeFragment();
+                currentFragment = homeFragment;
                 break;
             case R.id.bottom_navbar_inbox:
-                fragment = new PassengerInboxFragment();
+                currentFragment = inboxFragment;
                 break;
             case R.id.bottom_navbar_history:
-                fragment = new PassengerHistoryFragment();
+                currentFragment = historyFragment;
                 break;
         }
-        if (fragment != null) {
-            loadFragment(fragment);
+        if (currentFragment != null) {
+            loadFragment(currentFragment);
         }
         return true;
     }
@@ -65,6 +79,7 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
     @Override
     protected void onResume() {
         super.onResume();
+
     }
 
     @Override

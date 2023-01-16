@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -16,7 +17,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.TableLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -61,12 +65,6 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     LatLng endCoordinates;
     private String TAG = "so47492459";
     Polyline route;
-
-
-
-
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,6 +131,32 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
+        getView().findViewById(R.id.ride_details).setVisibility(View.GONE);
+        Button setRouteBtn = getView().findViewById(R.id.set_route_button);
+        setRouteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getView().findViewById(R.id.address_input).setVisibility(View.GONE);
+                getView().findViewById(R.id.ride_details).setVisibility(View.VISIBLE);
+
+            }
+        });
+        ImageButton backBtn = getView().findViewById(R.id.back_details);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getView().findViewById(R.id.address_input).setVisibility(View.VISIBLE);
+                getView().findViewById(R.id.ride_details).setVisibility(View.GONE);
+            }
+        });
+        Button findVehicleBtn = getView().findViewById(R.id.find_vehicle_btn);
+        setRouteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createRide();
+            }
+        });
+
     }
 
     @Override
@@ -407,6 +431,9 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
         }
     }
 
+    public void createRide(){
+
+    }
 
 
 }
