@@ -30,7 +30,7 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
     PassengerInboxFragment inboxFragment;
     PassengerHistoryFragment historyFragment;
     Fragment currentFragment;
-
+    SendRideDTO ourRide;
 
     Integer id = 1;
     Boolean doesRideExist = false;
@@ -50,15 +50,6 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         currentFragment = homeFragment;
         loadFragment(currentFragment);
 
-        RelativeLayout content  = findViewById(R.id.passenger_content);
-        content.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(homeFragment.ourRide != null){
-                    checkIfRideIsAvailable(homeFragment.ourRide);
-                }
-            }
-        });
 
 
         Call<RideDTO> call = ServiceUtils.reviewerService.getPassengerActiveRide(id);
@@ -111,15 +102,13 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         getSupportFragmentManager().beginTransaction().replace(R.id.passenger_content, fragment).commit();
     }
 
-    private void checkIfRideIsAvailable(SendRideDTO ride){
+    public void checkIfRideIsAvailable(SendRideDTO ride){
         //TODO: Implementirati da zapravo prima ID ulogovanog korisnika, ne random ID
         Call<SendRideDTO> call = ServiceUtils.reviewerService.getAvailableDrivers(ride);
         call.enqueue(new Callback<SendRideDTO>(){
             @Override
             public void onResponse(Call<SendRideDTO> call, Response<SendRideDTO> response) {
-                System.out.println(doesRideExist + "2");
                 setDoesRideExist(response.isSuccessful());
-                System.out.println(doesRideExist + "3");
             }
 
             @Override

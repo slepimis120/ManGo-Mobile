@@ -159,7 +159,7 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
             }
         });
         Button findVehicleBtn = getView().findViewById(R.id.find_vehicle_btn);
-        setRouteBtn.setOnClickListener(new View.OnClickListener() {
+        findVehicleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 createRide();
@@ -278,7 +278,7 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     public void onLocationChanged(@NonNull Location location) {
 //        Toast.makeText(getActivity(), "NEW LOCATION", Toast.LENGTH_SHORT).show();
         if (map != null) {
-            addMarker(location);
+            //addMarker(location);
         }
     }
 
@@ -474,9 +474,11 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
 
         }
 
+        Toast.makeText(getContext(), "Searching for driver", Toast.LENGTH_SHORT).show();
         SendRideDTO finalRide = new SendRideDTO(locations, passengers, selectedVehicleType,transportingBabies, transportingPets);
         ourRide = finalRide;
 
+        ((PassengerMainActivity)getActivity()).checkIfRideIsAvailable(ourRide);
     }
 
 
