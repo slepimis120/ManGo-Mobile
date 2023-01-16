@@ -26,7 +26,7 @@
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="@string/your_current_ride"
-                android:textColor="@color/dark_gray"
+                android:textColor="#3E3E3E"
                 android:textSize="30dp"
                 android:layout_marginBottom="10dp"/>
 
@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:text="@string/end_ride"
             android:backgroundTint="@color/white"
-            android:textColor="@color/dark_gray"
+            android:textColor="#3E3E3E"
             android:layout_gravity="center"
             android:id="@+id/end_ride_button"
             android:textSize="20dp"

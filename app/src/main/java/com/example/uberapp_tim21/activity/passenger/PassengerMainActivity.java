@@ -51,16 +51,6 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         loadFragment(currentFragment);
 
 
-        final View passengerHome  = getLayoutInflater().inflate(R.layout.fragment_passenger_home, null);
-        Button findVehicleBtn = passengerHome.findViewById(R.id.find_vehicle_btn);
-        findVehicleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(homeFragment.ourRide != null){
-                    checkIfRideIsAvailable(homeFragment.ourRide);
-                }
-            }
-        });
 
         Call<RideDTO> call = ServiceUtils.reviewerService.getPassengerActiveRide(id);
         call.enqueue(new Callback<RideDTO>(){

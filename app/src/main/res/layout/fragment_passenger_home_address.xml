@@ -29,7 +29,7 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center"
             android:textSize="30dp"
-            android:textColor="@color/dark_gray"
+            android:textColor="#3E3E3E"
             android:padding="10dp"/>
 
     </LinearLayout>
@@ -74,7 +74,7 @@
                 android:paddingStart="15dp"
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
-                android:textColor="@color/dark_gray"
+                android:textColor="#3E3E3E"
                 android:autofillHints="postalAddress"/>
 
             <EditText
@@ -90,7 +90,7 @@
                 android:paddingBottom="8dp"
                 android:paddingTop="8dp"
                 android:layout_marginTop="10dp"
-                android:textColor="@color/dark_gray"
+                android:textColor="#3E3E3E"
                 android:autofillHints="postalAddress"
                 />
         </LinearLayout>

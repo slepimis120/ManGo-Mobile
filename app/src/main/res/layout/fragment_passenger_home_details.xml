@@ -29,7 +29,7 @@
             android:fontFamily="@font/open_sans"
             android:gravity="center"
             android:textSize="30dp"
-            android:textColor="@color/dark_gray"
+            android:textColor="#3E3E3E"
             android:padding="10dp"/>
 
     </LinearLayout>
