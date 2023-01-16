@@ -47,6 +47,10 @@
     <string name="line2">Line2</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="mango">Modern\nAffordable\nNecessary</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="dont_have_account">Don\'t have an account?</string>
+    <string name="sign_up">Sign up</string>
 
     <string name="create_account">CREATE ACCOUNT</string>
     <string name="fname">First name</string>
@@ -54,7 +58,6 @@
     <string name="repeat_password">Repeat password</string>
     <string name="address">Address</string>
     <string name="terms_and_conditions">Agree to terms and conditions</string>
-    <string name="sign_up">Sign up</string>
     <string name="have_an_account">Already have an account?</string>
 
     <string name="profile">Profile</string>
@@ -65,5 +68,22 @@
     <string name="conversations">Conversations</string>
     <string name="customer_support">Customer support</string>
 
+    <string name="where_are_you_going">Where are you going?</string>
+    <string name="set_route">SET ROUTE</string>
+    <string name="ride_details">Ride details</string>
+    <string name="find_vehicle">FIND VEHICLE </string>
+    <string name="vehicle_type">Vehicle type</string>
+    <string name="standard">STANDARD</string>
+    <string name="luxury">LUXURY</string>
+    <string name="van">VAN</string>
+    <string name="reserve_ride">Reserve ride?</string>
+    <string name="transporting_pets">Transporting pets?</string>
+    <string name="transporting_babies">Transporting babies?</string>
+    <string name="your_current_ride">Your current ride</string>
+    <string name="end_ride">End ride</string>
+    <string name="string_my_profile">My profile</string>
+    <string name="first_last_name">First and Last name</string>
+    <string name="phone_number">+381600538922</string>
+    <string name="generate_report">Generate report</string>
 
 </resources>
