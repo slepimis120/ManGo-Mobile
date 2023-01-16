@@ -133,9 +133,9 @@ public class DriverMainActivity extends AppCompatActivity implements BottomNavig
                     @Override
                     public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
 
-                        TextView start = findViewById(R.id.driver_start_location);
+                        TextView start = (TextView)findViewById(R.id.driver_start_location);
                         start.setText(rideDTO.getLocations().get(0).getDeparture().getAddress());
-                        TextView end = findViewById(R.id.driver_end_location);
+                        TextView end = (TextView)findViewById(R.id.driver_end_location);
                         end.setText(rideDTO.getLocations().get(0).getDestination().getAddress());
                         TextView price = findViewById(R.id.driver_price);
                         price.setText("Price: " + rideDTO.getTotalCost() + " din") ;
