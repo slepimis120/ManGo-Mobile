@@ -11,9 +11,16 @@ import com.example.uberapp_tim21.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class PassengerMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+<<<<<<< HEAD
+    //PassengerProfileFragment profileFragment = new PassengerProfileFragment();
+    //PassengerHomeFragment homeFragment = new PassengerHomeFragment();
+    //PassengerInboxFragment inboxFragment = new PassengerInboxFragment();
+    //PassengerHistoryFragment historyFragment = new PassengerHistoryFragment();
+    //Fragment currentFragment;
 
 
-
+=======
+>>>>>>> parent of 9ceb3b8 (Created mapping of inputted addresses and drawing a route between them)
 
     BottomNavigationView bottomNavigationView;
     @Override
@@ -23,28 +30,28 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         bottomNavigationView = findViewById(R.id.bottonnav);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.bottom_navbar_home);
+        //currentFragment = homeFragment;
         loadFragment(new PassengerHomeFragment());
-
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        Fragment fragment = null;
+        Fragment currentFragment = null;
         switch (item.getItemId()) {
             case R.id.bottom_navbar_profile:
-                fragment = new PassengerProfileFragment();
+                currentFragment = new PassengerProfileFragment();
                 break;
             case R.id.bottom_navbar_home:
-                fragment = new PassengerHomeFragment();
+                currentFragment = new PassengerHomeFragment();
                 break;
             case R.id.bottom_navbar_inbox:
-                fragment = new PassengerInboxFragment();
+                currentFragment = new PassengerInboxFragment();
                 break;
             case R.id.bottom_navbar_history:
-                fragment = new PassengerHistoryFragment();
+                currentFragment = new PassengerHistoryFragment();
                 break;
         }
-        if (fragment != null) {
-            loadFragment(fragment);
+        if (currentFragment != null) {
+            loadFragment(currentFragment);
         }
         return true;
     }
