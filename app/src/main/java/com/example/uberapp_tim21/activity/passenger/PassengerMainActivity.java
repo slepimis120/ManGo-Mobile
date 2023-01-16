@@ -80,14 +80,11 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
 
     private void checkIfRideIsAvailable(){
         //TODO: Implementirati da zapravo prima ID ulogovanog korisnika, ne random ID
-        System.out.println("AA");
         Call<RideDTO> call = ServiceUtils.reviewerService.getPassengerActiveRide(id);
         call.enqueue(new Callback<RideDTO>(){
             @Override
             public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
-                System.out.println(doesRideExist + "2");
                 setDoesRideExist(response.isSuccessful());
-                System.out.println(doesRideExist + "3");
             }
 
             @Override
