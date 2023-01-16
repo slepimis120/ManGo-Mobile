@@ -19,6 +19,7 @@ public interface ReviewerService {
     })
     @GET(ServiceUtils.SERVICE_API_PATH + "ride/passenger/{id}/active")
     Call<RideDTO> getPassengerActiveRide(@Path(value="id") Integer id);
+
     @GET(ServiceUtils.SERVICE_API_PATH + "getAvailableDrivers")
     Call<SendRideDTO> getAvailableDrivers(@Body SendRideDTO ride);
 }
