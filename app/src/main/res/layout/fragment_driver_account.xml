@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.driver.DriverAccountActivity"
+    android:backgroundTint="@color/white">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="22dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/previous_icon" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/string_my_profile"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:alpha="0.5"
+            />
+
+        <ImageButton
+            android:alpha="0.5"
+            android:layout_weight="1"
+            android:id="@+id/imageButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/edit_icon"
+            android:background="#00000000"/>
+    </LinearLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/registration_profile_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:src="@drawable/profile_mock"
+        app:civ_border_color="@color/mango_yellow"
+        app:civ_border_width="10dp"
+        android:layout_marginBottom="30dp"
+        />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/first_last_name"
+        android:textSize="20dp"
+        android:gravity="left"
+        android:layout_gravity="left"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:drawableStart="@drawable/person_icon"
+        android:textColor="@color/black"
+        android:alpha="0.8"/>
+
+    <TextView
+        android:id="@+id/phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number"
+        android:textSize="20dp"
+        android:gravity="left"
+        android:layout_gravity="left"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        android:drawableStart="@drawable/phone_icon"
+        android:alpha="0.8"/>
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/address"
+        android:textSize="20dp"
+        android:gravity="left"
+        android:layout_gravity="left"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:drawableStart="@drawable/location_icon"
+        android:textColor="@color/black"
+        android:alpha="0.8"/>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_email_hint"
+        android:textSize="20dp"
+        android:gravity="left"
+        android:layout_gravity="left"
+        android:drawableStart="@drawable/email_icon"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        android:alpha="0.8"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/mango_yellow"
+        android:drawableStart="@drawable/report_icon"
+        android:text="@string/generate_report" />
+
+</LinearLayout>

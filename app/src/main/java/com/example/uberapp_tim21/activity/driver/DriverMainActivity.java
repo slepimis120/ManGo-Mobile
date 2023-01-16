@@ -78,7 +78,7 @@ public class DriverMainActivity extends AppCompatActivity implements BottomNavig
         Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.bottom_navbar_profile:
-                fragment = new DriverProfileFragment();
+                fragment = new DriverAccountFragment();
                 break;
             case R.id.bottom_navbar_home:
                 fragment = new DriverCurrentRideFragment();
