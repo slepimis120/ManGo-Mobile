@@ -12,7 +12,13 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.uberapp_tim21.R;
+import com.example.uberapp_tim21.activity.dto.RideDTO;
+import com.example.uberapp_tim21.activity.service.ServiceUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PassengerMainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
 
@@ -23,7 +29,10 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
     Fragment currentFragment;
 
 
+    Integer id = 1;
+    Boolean doesRideExist = false;
     BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +48,39 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         loadFragment(currentFragment);
 
 
+        Call<RideDTO> call = ServiceUtils.reviewerService.getPassengerActiveRide(id);
+        call.enqueue(new Callback<RideDTO>(){
+            @Override
+            public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
+                if(response.isSuccessful()){
+                    loadFragment(new PassengerCurrentRideFragment());
+                }else{
+                    loadFragment(new PassengerHomeFragment());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<RideDTO> call, Throwable t) {
+                loadFragment(new PassengerHomeFragment());
+            }
+        });
 
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
+        checkIfRideIsAvailable();
         switch (item.getItemId()) {
             case R.id.bottom_navbar_profile:
                 currentFragment = profileFragment;
                 break;
             case R.id.bottom_navbar_home:
                 currentFragment = homeFragment;
+                if(this.doesRideExist){
+                    fragment = new PassengerCurrentRideFragment();
+                }else{
+                    fragment = new PassengerHomeFragment();
+                }
                 break;
             case R.id.bottom_navbar_inbox:
                 currentFragment = inboxFragment;
@@ -64,6 +96,25 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
     }
     void loadFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction().replace(R.id.passenger_content, fragment).commit();
+    }
+
+    private void checkIfRideIsAvailable(){
+        //TODO: Implementirati da zapravo prima ID ulogovanog korisnika, ne random ID
+        System.out.println("AA");
+        Call<RideDTO> call = ServiceUtils.reviewerService.getPassengerActiveRide(id);
+        call.enqueue(new Callback<RideDTO>(){
+            @Override
+            public void onResponse(Call<RideDTO> call, Response<RideDTO> response) {
+                System.out.println(doesRideExist + "2");
+                setDoesRideExist(response.isSuccessful());
+                System.out.println(doesRideExist + "3");
+            }
+
+            @Override
+            public void onFailure(Call<RideDTO> call, Throwable t) {
+                setDoesRideExist(false);
+            }
+        });
     }
 
     @Override
@@ -97,5 +148,7 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
         super.onDestroy();
     }
 
-
+    private void setDoesRideExist(boolean doesRideExist){
+        this.doesRideExist = doesRideExist;
+    }
 }
