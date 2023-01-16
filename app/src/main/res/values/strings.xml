@@ -65,6 +65,8 @@
     <string name="messages">Messages</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="conversations">Conversations</string>
+    <string name="customer_support">Customer support</string>
 
     <string name="where_are_you_going">Where are you going?</string>
     <string name="set_route">SET ROUTE</string>
