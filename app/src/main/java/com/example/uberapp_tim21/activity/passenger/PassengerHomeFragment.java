@@ -95,7 +95,10 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
                         if(startMarker != null){
                             startMarker.remove();
                         }
-                        startMarker = map.addMarker(new MarkerOptions().position(startCoordinates).title("Nemanja sikelic"));
+                        startMarker = map.addMarker(new MarkerOptions().position(startCoordinates).title("Your route")
+                                .snippet("Price: 320din Duration:6min Distance 2.4km"));
+
+                        startMarker.hideInfoWindow();
                         map.moveCamera(CameraUpdateFactory.newLatLng(startCoordinates));
                         createRoute();
                     }
@@ -426,7 +429,9 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     }
 
     public void createRoute(){
+
         if(startCoordinates != null && endCoordinates != null){
+            startMarker.showInfoWindow();
             if(route != null){
                 route.remove();
             }
@@ -437,6 +442,7 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
 
                 }
             }).execute();
+
         }
     }
 
