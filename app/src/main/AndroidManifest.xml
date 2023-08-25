@@ -11,7 +11,6 @@
 
     <application
         android:allowBackup="true"
-        android:usesCleartextTraffic="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher_mango"
@@ -19,8 +18,8 @@
         android:roundIcon="@mipmap/ic_launcher_mango_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UberApp_Tim21"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -32,7 +31,6 @@
              project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
              "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
         -->
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -59,6 +57,13 @@
         </activity>
         <activity
             android:name=".activity.driver.DriverAccountActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.driver.DriverAccountEditActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -110,10 +115,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
     </application>
-
-
 
 </manifest>

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.driver.DriverAccountActivity"
-    android:backgroundTint="@color/white">
+    android:background="@color/white">
 
 
 
@@ -16,13 +16,6 @@
         android:orientation="horizontal"
         android:padding="10dp"
         android:layout_marginTop="10dp">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="22dp"
-            android:layout_height="100dp"
-            android:layout_weight="1"
-            android:src="@drawable/previous_icon" />
 
         <TextView
             android:id="@+id/textView4"
@@ -37,13 +30,14 @@
             />
 
         <ImageButton
-            android:alpha="0.5"
-            android:layout_weight="1"
             android:id="@+id/imageButton3"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:alpha="0.5"
+            android:background="#00000000"
             app:srcCompat="@drawable/edit_icon"
-            android:background="#00000000"/>
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/registration_profile_image"
@@ -118,5 +112,13 @@
         android:backgroundTint="@color/mango_yellow"
         android:drawableStart="@drawable/report_icon"
         android:text="@string/generate_report" />
+
+    <Button
+        android:id="@+id/buttonStats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/mango_yellow"
+        android:drawableStart="@drawable/report_icon"
+        android:text="@string/generate_stats" />
 
 </LinearLayout>

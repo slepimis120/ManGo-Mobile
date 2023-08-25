@@ -85,5 +85,17 @@
     <string name="first_last_name">First and Last name</string>
     <string name="phone_number">+381600538922</string>
     <string name="generate_report">Generate report</string>
+    <string name="save">Save</string>
+    <string name="generate_stats">Generate stats</string>
+    <color name="white">#FFFFFF</color>
+    <string name="title_activity_driver_account_edit">DriverAccountEditActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>

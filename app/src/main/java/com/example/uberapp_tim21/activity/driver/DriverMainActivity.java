@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -48,6 +49,7 @@ public class DriverMainActivity extends AppCompatActivity implements BottomNavig
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_driver_main);
+        getSupportActionBar().hide();
         bottomNavigationView = findViewById(R.id.bottonnav);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.bottom_navbar_home);
@@ -76,9 +78,12 @@ public class DriverMainActivity extends AppCompatActivity implements BottomNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
+        Intent i;
         switch (item.getItemId()) {
             case R.id.bottom_navbar_profile:
-                fragment = new DriverAccountFragment();
+                i = new Intent(DriverMainActivity.this, DriverAccountActivity.class);
+                startActivity(i);
+                overridePendingTransition(0,0);
                 break;
             case R.id.bottom_navbar_home:
                 fragment = new DriverCurrentRideFragment();

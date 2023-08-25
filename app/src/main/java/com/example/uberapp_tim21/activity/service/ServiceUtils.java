@@ -1,5 +1,8 @@
 package com.example.uberapp_tim21.activity.service;
 
+import com.example.uberapp_tim21.activity.connection.DriverService;
+import com.example.uberapp_tim21.activity.connection.UserService;
+
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -8,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ServiceUtils {
 
-    public static final String SERVICE_API_PATH = "http://10.0.2.2:8080/api/";
+    public static final String SERVICE_API_PATH = "http://192.168.0.36:8080/api/";
     public static final String ADD = "add";
     public static final String GET = "get";
 
@@ -32,4 +35,10 @@ public class ServiceUtils {
             .build();
 
     public static ReviewerService reviewerService = retrofit.create(ReviewerService.class);
+
+    public static UserService userService = retrofit.create(UserService.class);
+
+    public static DriverService driverService = retrofit.create(DriverService.class);
+
+
 }

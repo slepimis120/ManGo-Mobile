@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".activity.driver.DriverAccountEditActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:alpha="0.5"
+            android:gravity="center"
+            android:text="@string/string_my_profile"
+            android:textColor="@color/black"
+            android:textSize="40dp" />
+
+    </LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/registration_profile_image"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/profile_mock"
+        app:civ_border_color="@color/mango_yellow"
+        app:civ_border_width="10dp" />
+
+    <EditText
+        android:id="@+id/user_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:autofillHints=""
+        android:backgroundTint="@android:color/black"
+        android:drawablePadding="7dp"
+        android:drawableTint="?attr/colorOnBackground"
+        android:focusable="true"
+        android:hint="@string/address"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray" />
+
+    <EditText
+        android:id="@+id/user_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:autofillHints=""
+        android:backgroundTint="@android:color/black"
+        android:drawablePadding="7dp"
+        android:drawableTint="?attr/colorOnBackground"
+        android:focusable="true"
+        android:hint="@string/register_phone_hint"
+        android:inputType="phone"
+        android:minHeight="48dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray" />
+
+    <EditText
+        android:id="@+id/user_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:autofillHints=""
+        android:backgroundTint="@android:color/black"
+        android:drawablePadding="7dp"
+        android:drawableTint="?attr/colorOnBackground"
+        android:focusable="true"
+        android:hint="@string/register_password_hint"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/mango_yellow"
+        android:text="@string/save" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottonnav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="120dp"
+        android:background="@color/mango_yellow"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/navbar_colors"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navbar"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</LinearLayout>
