@@ -5,14 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 
 import com.example.uberapp_tim21.R;
+import com.example.uberapp_tim21.activity.dto.ResponseRideDTO;
 import com.example.uberapp_tim21.activity.dto.RideDTO;
 import com.example.uberapp_tim21.activity.dto.SendRideDTO;
 import com.example.uberapp_tim21.activity.service.ServiceUtils;
@@ -94,17 +95,19 @@ public class PassengerMainActivity extends AppCompatActivity implements BottomNa
     }
 
     public void checkIfRideIsAvailable(SendRideDTO ride){
-        //TODO: Implementirati da zapravo prima ID ulogovanog korisnika, ne random ID
-        Call<SendRideDTO> call = ServiceUtils.reviewerService.getAvailableDrivers(ride);
-        call.enqueue(new Callback<SendRideDTO>(){
+        SharedPreferences pref = getSharedPreferences("AirRide_preferences", Context.MODE_PRIVATE);
+        String jwt = pref.getString("accessToken", "");
+        Long id = Long.valueOf(pref.getString("id", ""));
+        ServiceUtils.rideService.createRide("Bearer "+jwt, ride).enqueue(new Callback<ResponseRideDTO>() {
+
             @Override
-            public void onResponse(Call<SendRideDTO> call, Response<SendRideDTO> response) {
+            public void onResponse(Call<ResponseRideDTO> call, Response<ResponseRideDTO> response) {
                 setDoesRideExist(response.isSuccessful());
             }
 
             @Override
-            public void onFailure(Call<SendRideDTO> call, Throwable t) {
-                setDoesRideExist(false);
+            public void onFailure(Call<ResponseRideDTO> call, Throwable t) {
+                Log.wtf("message fill data: ", t.getMessage());
             }
         });
     }

@@ -1,28 +1,33 @@
-package com.example.uberapp_tim21.activity.dto;
+package com.example.uberapp_tim21.activity.model;
 
-import com.example.uberapp_tim21.activity.model.Location;
+import com.example.uberapp_tim21.activity.dto.LocationDTO;
 
-public class LocationDTO {
+public class Location {
 
-
+    private Integer id;
     private String address;
-
     private Float latitude;
-
     private Float longitude;
 
-    public LocationDTO(String address, Float latitude, Float longitude){
+
+    public Location(String address, Float latitude, Float longitude) {
         this.address = address;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public LocationDTO(){}
+    public Location(LocationDTO locationDTO){
+        this.address = locationDTO.getAddress();
+        this.latitude = locationDTO.getLatitude();
+        this.longitude = locationDTO.getLongitude();
+    }
 
-    public LocationDTO(Location location){
-        this.address = location.getAddress();
-        this.latitude = location.getLatitude();
-        this.longitude = location.getLongitude();
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getAddress() {
@@ -49,4 +54,7 @@ public class LocationDTO {
         this.longitude = longitude;
     }
 
+    public Location() {
+
+    }
 }

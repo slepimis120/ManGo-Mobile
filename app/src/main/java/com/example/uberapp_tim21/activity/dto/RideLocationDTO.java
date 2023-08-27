@@ -1,5 +1,7 @@
 package com.example.uberapp_tim21.activity.dto;
 
+import com.example.uberapp_tim21.activity.model.RideLocation;
+
 public class RideLocationDTO {
 
 
@@ -14,6 +16,11 @@ public class RideLocationDTO {
     }
 
     public RideLocationDTO(){}
+
+    public RideLocationDTO(RideLocation rideLocation){
+        this.departure = new LocationDTO(rideLocation.getDeparture());
+        this.destination = new LocationDTO(rideLocation.getDestination());
+    }
 
     public LocationDTO getDeparture() {
         return departure;

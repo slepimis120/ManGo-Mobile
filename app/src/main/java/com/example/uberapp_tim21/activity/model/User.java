@@ -1,5 +1,6 @@
 package com.example.uberapp_tim21.activity.model;
 
+import com.example.uberapp_tim21.activity.dto.ExpandedUserDTO;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -43,6 +44,18 @@ public class User implements Serializable {
         this.password = password;
         this.profilePhoto = profilePhoto;
         this.blocked = blocked;
+    }
+
+    public User(ExpandedUserDTO data) {
+        this.id = -1L;
+        this.name = data.getName();
+        this.surname = data.getSurname();
+        this.profilePhoto = data.getProfilePicture();
+        this.phoneNumber = data.getTelephoneNumber();
+        this.email = data.getEmail();
+        this.address = data.getAddress();
+        this.password = data.getPassword();
+        this.blocked = false;
     }
 
     public Long getId() {

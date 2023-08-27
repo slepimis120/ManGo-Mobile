@@ -1,31 +1,28 @@
-package com.example.uberapp_tim21.activity.dto;
+package com.example.uberapp_tim21.activity.model;
 
-import com.example.uberapp_tim21.activity.model.Vehicle;
+import com.example.uberapp_tim21.activity.dto.VehicleDTO;
 
-public class VehicleDTO {
+import java.sql.Driver;
+
+public class Vehicle {
 
     private Integer id;
-
-    private Integer driverId;
-
-    private Vehicle.Type vehicleType;
-
+    private Driver driver;
+    private Type vehicleType;
     private String model;
-
     private String licenseNumber;
-
-    private LocationDTO currentLocation;
-
+    private Location currentLocation;
     private Integer passengerSeats;
-
     private boolean babyTransport;
-
     private boolean petTransport;
 
+    public enum Type{
+        STANDARD, LUXURY, VAN
+    }
 
-    public VehicleDTO(Integer id, Integer driverId, Vehicle.Type vehicleType, String model, String licenseNumber, LocationDTO currentLocation, Integer passengerSeats, boolean babyTransport, boolean petTransport) {
+    public Vehicle(Integer id, Driver driver, Type vehicleType, String model, String licenseNumber, Location currentLocation, Integer passengerSeats, boolean babyTransport, boolean petTransport) {
         this.id = id;
-        this.driverId = driverId;
+        this.driver = driver;
         this.vehicleType = vehicleType;
         this.model = model;
         this.licenseNumber = licenseNumber;
@@ -35,7 +32,18 @@ public class VehicleDTO {
         this.petTransport = petTransport;
     }
 
-    public VehicleDTO(){}
+    public Vehicle() {
+    }
+
+    public Vehicle(VehicleDTO vehicleDTO){
+        this.vehicleType = vehicleDTO.getVehicleType();
+        this.model = vehicleDTO.getModel();
+        this.licenseNumber = vehicleDTO.getLicenseNumber();
+        this.currentLocation = new Location(vehicleDTO.getCurrentLocation());
+        this.passengerSeats = vehicleDTO.getPassengerSeats();
+        this.babyTransport = vehicleDTO.isBabyTransport();
+        this.petTransport = vehicleDTO.isPetTransport();
+    }
 
     public Integer getId() {
         return id;
@@ -45,19 +53,19 @@ public class VehicleDTO {
         this.id = id;
     }
 
-    public Integer getDriverId() {
-        return driverId;
+    public Driver getDriver() {
+        return driver;
     }
 
-    public void setDriverId(Integer driverId) {
-        this.driverId = driverId;
+    public void setDriver(Driver driver) {
+        this.driver = driver;
     }
 
-    public Vehicle.Type getVehicleType() {
+    public Type getVehicleType() {
         return vehicleType;
     }
 
-    public void setVehicleType(Vehicle.Type vehicleType) {
+    public void setVehicleType(Type vehicleType) {
         this.vehicleType = vehicleType;
     }
 
@@ -77,11 +85,11 @@ public class VehicleDTO {
         this.licenseNumber = licenseNumber;
     }
 
-    public LocationDTO getCurrentLocation() {
+    public Location getCurrentLocation() {
         return currentLocation;
     }
 
-    public void setCurrentLocation(LocationDTO currentLocation) {
+    public void setCurrentLocation(Location currentLocation) {
         this.currentLocation = currentLocation;
     }
 
@@ -108,5 +116,4 @@ public class VehicleDTO {
     public void setPetTransport(boolean petTransport) {
         this.petTransport = petTransport;
     }
-
 }

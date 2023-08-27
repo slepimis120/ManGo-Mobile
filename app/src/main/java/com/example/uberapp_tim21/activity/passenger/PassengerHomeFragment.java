@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -33,11 +34,14 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.uberapp_tim21.R;
+import com.example.uberapp_tim21.activity.dto.GetUserDTO;
 import com.example.uberapp_tim21.activity.dto.LocationDTO;
 import com.example.uberapp_tim21.activity.dto.PassengerDTO;
 import com.example.uberapp_tim21.activity.dto.RideLocationDTO;
 import com.example.uberapp_tim21.activity.dto.SendRideDTO;
 import com.example.uberapp_tim21.activity.dto.UserDTO;
+import com.example.uberapp_tim21.activity.model.User;
+import com.example.uberapp_tim21.activity.service.ServiceUtils;
 import com.example.uberapp_tim21.activity.tools.DirectionPointListener;
 import com.example.uberapp_tim21.activity.tools.GetPathFromLocation;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -54,6 +58,10 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class PassengerHomeFragment extends Fragment implements LocationListener, OnMapReadyCallback, View.OnFocusChangeListener {
@@ -74,6 +82,7 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
     private String TAG = "so47492459";
     Polyline route;
     SendRideDTO ourRide;
+    GetUserDTO userDTO;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -456,11 +465,30 @@ public class PassengerHomeFragment extends Fragment implements LocationListener,
         RideLocationDTO ridelocation = new RideLocationDTO(startLocationDTO, endLocationDTO);
         ArrayList<RideLocationDTO> locations = new ArrayList<>();
         locations.add(ridelocation);
-        UserDTO passenger1 = new UserDTO(1, "aleksandrab024@hotmail.com");
-        UserDTO passenger2 = new UserDTO(2, "slepimis120@gmail.com");
+
+        SharedPreferences pref = this.getActivity().getSharedPreferences("AirRide_preferences", Context.MODE_PRIVATE);
+        Long id = Long.valueOf(pref.getString("id", ""));
+        String jwt = pref.getString("accessToken", "");
         ArrayList<UserDTO> passengers = new ArrayList<>();
-        passengers.add(passenger1);
-        passengers.add(passenger2);
+        ServiceUtils.passengerService.findUser("Bearer "+jwt, id).enqueue(new Callback<GetUserDTO>() {
+
+            @Override
+            public void onResponse(Call<GetUserDTO> call, Response<GetUserDTO> response) {
+                userDTO = response.body();
+                UserDTO passenger1 = new UserDTO(id.intValue(), userDTO.getEmail());
+                passengers.add(passenger1);
+            }
+
+            @Override
+            public void onFailure(Call<GetUserDTO> call, Throwable t) {
+                Log.wtf("message fill data: ", t.getMessage());
+            }
+        });
+
+
+
+
+
         CheckBox pets = ((CheckBox)getView().findViewById(R.id.transporting_pets));
         CheckBox babies = ((CheckBox)getView().findViewById(R.id.transporting_babies));
         boolean transportingPets = pets.isChecked();
