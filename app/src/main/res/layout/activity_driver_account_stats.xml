@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    tools:context=".activity.driver.DriverAccountStatsActivity">
+
+
+    <RadioGroup
+        android:id="@+id/radiogroup"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/daily"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/mango_yellow"
+            android:checked="true"
+            android:gravity="center"
+            android:text="@string/daily"
+            android:textColor="#3E3E3E" />
+
+        <RadioButton
+            android:id="@+id/weekly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/mango_yellow"
+            android:text="@string/weekly"
+            android:textColor="#3E3E3E" />
+
+        <RadioButton
+            android:id="@+id/monthly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/mango_yellow"
+            android:text="@string/monthly"
+            android:textColor="#3E3E3E" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/rides_declined"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:alpha="0.8"
+        android:gravity="left"
+        android:text="@string/rides_declined"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/rides_accepted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:alpha="0.8"
+        android:gravity="left"
+        android:text="@string/rides_accepted"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/work_hours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:alpha="0.8"
+        android:gravity="left"
+        android:text="@string/work_hours"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:alpha="0.8"
+        android:gravity="left"
+        android:text="@string/pay"
+        android:textColor="@color/black"
+        android:textSize="20dp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottonnav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="170dp"
+        android:background="@color/mango_yellow"
+        app:itemIconTint="@color/white"
+        app:itemTextColor="@color/navbar_colors"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/bottom_navbar"></com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</LinearLayout>

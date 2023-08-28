@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +28,8 @@ public class DriverAccountActivity extends AppCompatActivity implements BottomNa
     TextView fullName, email, phoneNum, address;
     BottomNavigationView bottomNavigationView;
     ImageView editImage;
+    Button statsBtn;
+    Button reportsBtn;
     User driver;
 
     @Override
@@ -40,12 +43,24 @@ public class DriverAccountActivity extends AppCompatActivity implements BottomNa
         address = findViewById(R.id.address);
         phoneNum = findViewById(R.id.phone_number);
         editImage = findViewById(R.id.imageButton3);
+        statsBtn = findViewById(R.id.buttonStats);
+        reportsBtn = findViewById(R.id.button);
         bottomNavigationView = findViewById(R.id.bottonnav);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.bottom_navbar_profile);
 
         editImage.setOnClickListener(v -> {
             Intent mainIntent = new Intent(DriverAccountActivity.this, DriverAccountEditActivity.class);
+            startActivity(mainIntent);
+        });
+
+        statsBtn.setOnClickListener(v -> {
+            Intent mainIntent = new Intent(DriverAccountActivity.this, DriverAccountStatsActivity.class);
+            startActivity(mainIntent);
+        });
+
+        reportsBtn.setOnClickListener(v -> {
+            Intent mainIntent = new Intent(DriverAccountActivity.this, DriverAccountReportActivity.class);
             startActivity(mainIntent);
         });
 

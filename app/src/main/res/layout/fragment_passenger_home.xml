@@ -22,11 +22,11 @@
                 android:id="@+id/back_address"
                 android:layout_width="52sp"
                 android:layout_height="32sp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:alpha="0.6"
                 android:background="@drawable/previous_icon"
-                android:layout_gravity="center"
-                />
+                tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -74,31 +74,32 @@
                     android:id="@+id/start_location_passenger"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="14"
-                    android:inputType="textPostalAddress"
-                    android:hint="Start location"
                     android:layout_gravity="center"
                     android:background="@drawable/border_yellow"
+                    android:ems="14"
+                    android:hint="Start location"
+                    android:inputType="textPostalAddress"
                     android:paddingStart="15dp"
-                    android:paddingBottom="8dp"
                     android:paddingTop="8dp"
-                    android:textColor="#3E3E3E"/>
+                    android:paddingBottom="8dp"
+                    android:textColor="#3E3E3E"
+                    tools:ignore="TouchTargetSizeCheck" />
 
                 <EditText
                     android:id="@+id/end_location_passenger"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="14"
-                    android:inputType="textPostalAddress"
-                    android:hint="End location"
                     android:layout_gravity="center"
-                    android:background="@drawable/border_orange"
-                    android:paddingStart="15dp"
-                    android:paddingBottom="8dp"
-                    android:paddingTop="8dp"
                     android:layout_marginTop="10dp"
+                    android:background="@drawable/border_orange"
+                    android:ems="14"
+                    android:hint="End location"
+                    android:inputType="textPostalAddress"
+                    android:paddingStart="15dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
                     android:textColor="#3E3E3E"
-                    />
+                    tools:ignore="TouchTargetSizeCheck" />
             </LinearLayout>
         </LinearLayout>
 
@@ -116,8 +117,7 @@
 
     </TableLayout>
 
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ride_details">
@@ -131,11 +131,11 @@
                 android:id="@+id/back_details"
                 android:layout_width="52sp"
                 android:layout_height="32sp"
+                android:layout_gravity="center"
                 android:layout_weight="1"
                 android:alpha="0.6"
                 android:background="@drawable/previous_icon"
-                android:layout_gravity="center"
-                />
+                tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/textView3"

@@ -1,6 +1,9 @@
 package com.example.uberapp_tim21.activity.connection;
 
 import com.example.uberapp_tim21.activity.dto.ExpandedUserDTO;
+import com.example.uberapp_tim21.activity.dto.ReportDTO;
+import com.example.uberapp_tim21.activity.dto.StatisticsDTO;
+import com.example.uberapp_tim21.activity.dto.StatisticsDatesDTO;
 import com.example.uberapp_tim21.activity.model.User;
 
 import retrofit2.Call;
@@ -18,4 +21,7 @@ public interface DriverService {
 
     @PUT("driver/{id}")
     Call<User> saveDriverInfo(@Header("authorization") String jwt,@Path("id")Long id,@Body ExpandedUserDTO expandedUserDTO);
+
+    @POST("driver/stats/{id}")
+    Call<StatisticsDTO> getStats(@Header("authorization") String jwt, @Path("id")Long id, @Body StatisticsDatesDTO statisticsDatesDTO);
 }
